@@ -19,8 +19,8 @@ class SEXTANS:
 
         self.collect = None
 
-    # Complete matrix multiplication for given A and B matrix
-    def dot_multiply(self, A, B):
+    # Complete matrix multiplication for given A and B matrix, alpha, beta, and Cin
+    def dot_multiply(self, A, B, alpha, beta, Cin):
         a_dims = np.shape(A)
         b_dims = np.shape(B)
         self.collect = np.zeros((a_dims[0], b_dims[1]))
@@ -48,7 +48,7 @@ class SEXTANS:
                 self.collect[:, i*self.N_0:(i+1)*self.N_0] = self.collect[:, i*self.N_0:(i+1)*self.N_0] + self.accum(np.shape(B_ji)[1])
                 self.rst()
 
-        return self.collect
+        return alpha * self.collect + beta * Cin
 
     # Complete non-zero and out of order scheduling
     def schedule(self, A_pj, p):
