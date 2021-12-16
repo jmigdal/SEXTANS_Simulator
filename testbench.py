@@ -27,9 +27,11 @@ D = 0
 
 alpha = 1
 beta = 1
-for M in range(64, 600, 101):
-    for K in range(64, 600, 101):
-        for N in range(8, 16, 3):
+
+print('M\t K\t N\t result')
+for M in range(63, 600, 101):
+    for K in range(63, 600, 101):
+        for N in range(7, 25, 5):
             s = SEXTANS(M, P, K_0, N_0, num_PE, D)
             A = rand_sparse_arr([M, K], 0.1, [-50, 50])
             B = rand_sparse_arr([K, N], .9, [-50, 50])
@@ -40,6 +42,6 @@ for M in range(64, 600, 101):
             true = np.dot(A, B) * alpha + Cin * beta
 
             if not arr_equal(test, true):
-                print(M, K, N, 'failure')
+                print(str(M) + '\t' + str(K) + '\t' + str(N) + '\tfailure')
             else:
-                print(M, K, N, 'success')
+                print(str(M) + '\t' + str(K) + '\t' + str(N) + '\tsuccess')
